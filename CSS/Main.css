@@ -1,0 +1,125 @@
+*,
+*::before,
+*::after
+{
+	padding: 0;
+	margin: 0;
+	
+}
+
+.VM-Main
+{
+    position: absolute;
+    object-fit: cover;
+    background-color:wheat;
+    height: 100%;
+    width: 100%;
+}
+
+.VM 
+{
+    z-index: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(90vh);
+    height: 90vh;
+    aspect-ratio: 1/1;
+}
+
+
+@media (max-width: 1080px) 
+{
+    .VM 
+    {
+        z-index: 0;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 100vw;
+        height: calc(100vw);
+        aspect-ratio: 1/1;
+    }
+}
+
+.VM .VMimg
+{
+    z-index: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit:scale-down;
+}
+
+.VM .Holder
+{
+    position: absolute;
+
+    z-index: 1;
+    height: 70%;
+    width: 44%;
+    left: 18.1%;
+    top: 7.6%;
+}
+
+.Holder .Tin
+{   
+    position: absolute;
+    height: 10%;
+    width: 10%;
+    transform: translate(-50%, -50%);
+    transition: all 0.6s ease-in-out;
+    z-index: 1;
+}
+
+.Tin img
+{
+    position: relative  ;
+    height: 100%;
+    width: 100%;
+    object-fit:scale-down;
+}
+
+.Holder .Tin:hover
+{
+    position: relative  ;
+    height: 30%;
+    width: 30%;
+    object-fit:scale-down;
+    z-index: 2;
+}
+
+
+.InfoBox
+{
+    position: absolute;
+    height: 80%;
+    width: 80%;
+    z-index: 100;
+    background-color:  rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(25Px);
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    border-color:  rgba(50, 50, 50, 0.2);
+    border-style: solid;
+    border-width: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.InfoSubBox
+{
+    flex: 1;
+    padding: 2%;
+}
+
+.InfoSubBox .Centerimg
+{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    object-fit:scale-down;
+}
