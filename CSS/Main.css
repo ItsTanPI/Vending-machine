@@ -3,11 +3,14 @@
 *::after
 {
 	padding: 0;
-	margin: 0;
-	
+	margin: 0;	
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@font-face 
+{
+    font-family: "PageFont";
+    src: url("../Assets/Fonts/Jua-Regular.woff") format('woff');
+}
 
 .VM-Main
 {
@@ -58,7 +61,6 @@
 .VM .Holder
 {
     position: absolute;
-
     z-index: 1;
     height: 70%;
     width: 44%;
@@ -114,8 +116,7 @@
 
 .InfoBox .InfoSubBox
 {
-    flex: 1;
-    
+    flex: 1;   
 }
 
 .InfoSubBox .Centerimg
@@ -127,7 +128,6 @@
     left: 50%;
     top: 50%;
     transform: translate(-50% , -50%);
-    
 }
 
 .InfoBox .UIClose
@@ -138,7 +138,7 @@
     height: 70px;
     top: 0%;
     transform: translate(-100%, 0);
-    background-color: rgba(255, 0, 0, 0.2);
+    background-color: rgba(255, 0, 0, 0.5);
     border-radius: 0 0 0 50%;
 }
 
@@ -148,20 +148,29 @@
     height: 100%;
 }
 
-button
+label
 {
-    background-color: rgba(0, 100, 255, 0.4);
-    border: 0;
-    padding: 10px;
+    font-family: 'PageFont';
 }
 
-button:hover
+.InfoSubBox .BUYbtn
 {
-    background-color: rgba(0, 255, 100, 0.4);
+    font-family: 'PageFont';
+    font-size: 3rem;
+    width: 30%;
+    border-radius: 25px;
+    padding: 10px;
+    border:0;   
+    color: white;
+    background-color: rgba(0, 0, 255, 0.2);
 }
 
-
-table tr td
+.BUYbtn:hover
 {
-    padding: 10px;
+    background-color: rgba(0, 0, 255, 0.5)
+}
+
+.BUYbtn:active
+{
+    background-color: rgba(0, 0, 255, 0.2);
 }
