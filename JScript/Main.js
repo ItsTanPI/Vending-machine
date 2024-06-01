@@ -10,6 +10,8 @@ const softDrinks = [
     { id: 8, name: 'Root Beer', price: 180,  img: "Tin2" }
 ];
 
+var infoBox = false;
+
 function start() 
 {
     for (let index = 1; index < 9; index++) 
@@ -25,21 +27,34 @@ function start()
 
 $(document).ready(function()
 {
-    
-    start();
-
     $("#InfoBox").hide();
+    infoBox = false;
+    start();
     $(".Tin").click(function()
     {
-        var TinId = $(this).attr('id');
-        var obj = softDrinks[TinId];
-        var pic = "../Assets/Vending/Tins/" + obj.img + ".png";
-        console.log(pic);
-        $("#ProPic").attr("src", pic);
-        $("#Tid").html("<td>" + obj.id + "</td>");
-        $("#TName").html("<td>" + obj.name + "</td>");
-        $("#TPrice").html("<td>" + obj.price + "</td>");
+        if (!infoBox) 
+        {
+            infoBox = true;
+            var TinId = $(this).attr('id');
+            var obj = softDrinks[TinId];
+            var pic = "../Assets/Vending/Tins/" + obj.img + ".png";
+            console.log(pic);
+            $("#ProPic").attr("src", pic);
+            $("#Tid").html(obj.id);
+            $("#TName").html(obj.name);
+            $("#TPrice").html(obj.price);
+            $("#InfoBox").slideToggle(1000, "swing");    
+        }
+    });
 
-        $("#InfoBox").slideToggle(1000, "swing");
+    
+    $("#close").click(function()
+    {
+        if(infoBox)
+        {
+            console.log("bye");
+            $("#InfoBox").slideToggle(1000, "swing");
+            infoBox = false;
+        }
     });
 });

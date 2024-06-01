@@ -7,6 +7,8 @@
 	
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Varela+Round&display=swap');
+
 .VM-Main
 {
     position: absolute;
@@ -113,7 +115,6 @@
 .InfoSubBox
 {
     flex: 1;
-    padding: 2%;
 }
 
 .InfoSubBox .Centerimg
@@ -122,4 +123,39 @@
     height: 100%;
     width: 100%;
     object-fit:scale-down;
+}
+
+.InfoBox .UIClose
+{
+    position: absolute;
+    left: 100%;
+    width: 4%;
+    top: 0%;
+    transform: translate(-100%, 0);
+    background-color: rgba(255, 0, 0, 0.2);
+    border-radius: 0 0 0 50%;
+}
+
+.UIClose img
+{
+    width: 100%;
+    height: 100%;
+}
+
+button
+{
+    background-color: rgba(0, 100, 255, 0.4);
+    border: 0;
+    padding: 10px;
+}
+
+button:hover
+{
+    background-color: rgba(0, 255, 100, 0.4);
+}
+
+
+table tr td
+{
+    padding: 10px;
 }
