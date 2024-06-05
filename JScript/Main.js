@@ -3,7 +3,7 @@ var count = 0;
 
 const dataToSend = 
 {
-    Type: 'Refresh',
+    Table: 'Refresh',
     index: 0
 };
 
@@ -65,19 +65,24 @@ $(document).ready(async function()
         if (!infoBox) 
         {    
             var TinId = $(this).attr('id');
+            dataToSend.Table = "Machine";
             dataToSend.index = TinId;
             var obj = await ajax(dataToSend);
 
             var pic = "../Assets/Vending/Tins/" + obj.img + ".png";
+            
             $("#ProPic").attr("src", pic);
-            //$("#Tid").html(obj.id);
             $("#TName").html(obj.name);
-            $("#TPrice").html("$" + (obj.price));
+            $("#TQuantity").html(obj.Quantity);
+            $("#TPrice").html("₹" + (obj.price));
+            
+            
             $("#InfoBox").slideToggle(1000, "swing");
             infoBox = true;
         }
     });
 
+    
     $("#close").click(function()
     {
         Close();
