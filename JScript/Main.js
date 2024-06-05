@@ -1,5 +1,7 @@
 const softDrinks = 
 [
+
+    { id: 0, img: 'Missing', name: 'Missing', quantity: '0', price: 0 },
     // Soft Drinks
     { id: 1, img: 'Tin1', name: 'Coca Cola', quantity: '330ml', price: 110 },
     { id: 2, img: 'Tin2', name: 'Pepsi', quantity: '330ml', price: 120 },
