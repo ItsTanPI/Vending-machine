@@ -67,7 +67,7 @@ $(document).ready(function()
             //$("#Tid").html(obj.id);
             $("#TName").html(obj.name);
             $("#TPrice").html("$" + (obj.price));
-            $("#TQuantity").html(obj.Quantity);
+            $("#TQuantity").html(obj.quantity);
             $("#InfoBox").slideToggle(1000, "swing");    
         }
     });
