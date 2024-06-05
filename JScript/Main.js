@@ -9,7 +9,7 @@ const softDrinks =
     { id: 4, img: 'Tin4', name: 'Fanta', quantity: '330ml', price: 140 },
     { id: 5, img: 'Tin5', name: 'Mountain Dew', quantity: '330ml', price: 150 },
     { id: 6, img: 'Tin6', name: 'Red Bull', quantity: '250ml', price: 200 },
-    { id: 7, img: 'Tin7', name: 'Monster', quantity: '500ml', price: 250 },
+    { id: 7, img: 'Tin7', name: 'Monster', quantity: '250ml', price: 250 },
     { id: 8, img: 'Tin2', name: 'Pepsi', quantity: '330ml', price: 120 },
 
     // Fruit Juices
