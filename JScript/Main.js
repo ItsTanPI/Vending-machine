@@ -1,30 +1,37 @@
 const softDrinks = 
 [
-    { id: 0, name: 'Not Avaliable', price: 0, img: "missing"},
-    { id: 1, name: 'Coca Cola', price: 110, img: 'Tin1' },
-    { id: 2, name: 'Pepsi', price: 120, img: 'Tin2' },
-    { id: 3, name: 'Sprite', price: 130, img: 'Tin3' },
-    { id: 4, name: 'Fanta', price: 140, img: 'Tin4' },
-    { id: 5, name: 'Mountain Dew', price: 150, img: 'Bottel1' },
-    { id: 6, name: 'Dr Pepper', price: 160, img: 'Bar1' },
-    { id: 7, name: '7 Up', price: 170, img: 'Bar2' },
-    { id: 8, name: 'Root Beer', price: 180, img: 'Tin5' },
-    { id: 9, name: 'Coca Cola', price: 110, img: 'Tin6' },
-    { id: 10, name: 'Pepsi', price: 120, img: 'Tin7' },
-    { id: 11, name: 'Sprite', price: 130, img: 'Snack1' },
-    { id: 12, name: 'Fanta', price: 140, img: 'Snack2' },
-    { id: 13, name: 'Mountain Dew', price: 150, img: 'Bottel2' },
-    { id: 14, name: 'Dr Pepper', price: 160, img: 'Bar3' },
-    { id: 15, name: '7 Up', price: 170, img: 'Bar4' },
-    { id: 16, name: 'Root Beer', price: 180, img: 'Tin1' },
-    { id: 17, name: 'Coca Cola', price: 110, img: 'Tin2' },
-    { id: 18, name: 'Pepsi', price: 120, img: 'Tin3' },
-    { id: 19, name: 'Sprite', price: 130, img: 'Snack3' },
-    { id: 20, name: 'Fanta', price: 140, img: 'Snack4' },
-    { id: 21, name: 'Mountain Dew', price: 150, img: 'Bottel3' },
-    { id: 22, name: 'Dr Pepper', price: 160, img: 'Bar1' },
-    { id: 23, name: '7 Up', price: 170, img: 'Bar2' },
-    { id: 24, name: 'Root Beer', price: 180, img: 'Tin4' }
+    // Soft Drinks
+    { id: 1, img: 'tin1', name: 'Coca Cola', quantity: '330ml', price: 110 },
+    { id: 2, img: 'tin2', name: 'Pepsi', quantity: '330ml', price: 120 },
+    { id: 3, img: 'tin3', name: 'Sprite', quantity: '330ml', price: 130 },
+    { id: 4, img: 'tin4', name: 'Fanta', quantity: '330ml', price: 140 },
+    { id: 5, img: 'tin5', name: 'Mountain Dew', quantity: '330ml', price: 150 },
+    { id: 6, img: 'tin6', name: 'Red Bull', quantity: '250ml', price: 200 },
+    { id: 7, img: 'tin7', name: 'Monster', quantity: '500ml', price: 250 },
+    { id: 8, img: 'tin2', name: 'Pepsi', quantity: '330ml', price: 120 },
+
+    // Fruit Juices
+    { id: 9, img: 'bottel1', name: 'Tropicana', quantity: '1L', price: 150 },
+    { id: 10, img: 'bottel2', name: 'Minute Maid', quantity: '1L', price: 140 },
+    { id: 11, img: 'bottel3', name: 'Simply Orange', quantity: '1L', price: 160 },
+    { id: 12, img: 'bottel4', name: 'Ocean Spray', quantity: '1L', price: 170 },
+
+    // Snacks
+    { id: 13, img: 'snack1', name: 'Lay\'s', quantity: '200gm', price: 50 },
+    { id: 14, img: 'snack2', name: 'Doritos', quantity: '150gm', price: 60 },
+    { id: 15, img: 'snack3', name: 'Pringles', quantity: '100gm', price: 70 },
+    { id: 16, img: 'snack4', name: 'Cheetos', quantity: '100gm', price: 80 },
+
+    // Chocolate Bars
+    { id: 17, img: 'bar1', name: 'Snickers', quantity: '50gm', price: 30 },
+    { id: 18, img: 'bar2', name: 'Hershey\'s', quantity: '45gm', price: 25 },
+    { id: 19, img: 'bar3', name: 'Kit Kat', quantity: '40gm', price: 20 },
+    { id: 20, img: 'bar4', name: 'Twix', quantity: '50gm', price: 35 },
+
+    { id: 21, img: 'bottel5', name: 'Welch\'s', quantity: '1L', price: 180 },
+    { id: 22, img: 'tin5', name: 'Mountain Dew', quantity: '330ml', price: 150 },
+    { id: 23, img: 'snack2', name: 'Doritos', quantity: '150gm', price: 60 },
+    { id: 24, img: 'bar1', name: 'Snickers', quantity: '50gm', price: 30 },
 ];
 
 var infoBox = false;
@@ -58,6 +65,7 @@ $(document).ready(function()
             //$("#Tid").html(obj.id);
             $("#TName").html(obj.name);
             $("#TPrice").html("$" + (obj.price));
+            $("#TQuantity").html(obj.Quantity);
             $("#InfoBox").slideToggle(1000, "swing");    
         }
     });
