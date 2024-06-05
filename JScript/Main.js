@@ -3,18 +3,18 @@ var count = 0;
 
 const dataToSend = 
 {
-    Table: 'Refresh',
+    Table: 'Null',
     index: 0
 };
 
 async function start() 
 {
+    dataToSend.Table = 'ALL';
+    var obj = await ajax(dataToSend);
     for (let index = 1; index < 25; index++) 
     {
-        dataToSend.index = index;
         var ID = "#" + index.toString() + "H";
-        var obj = await ajax(dataToSend);
-        var pic = "../Assets/Vending/Tins/" + obj.img + ".png";
+        var pic = "../Assets/Vending/Tins/" + obj[index].proID + ".png";
         $(ID).attr("src", pic);
     }
 }
@@ -68,6 +68,7 @@ $(document).ready(async function()
             dataToSend.Table = "Machine";
             dataToSend.index = TinId;
             var obj = await ajax(dataToSend);
+            console.log(obj);
 
             var pic = "../Assets/Vending/Tins/" + obj.img + ".png";
             
