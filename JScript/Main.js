@@ -31,7 +31,7 @@ const softDrinks =
     { id: 21, img: 'Bottel5', name: 'Welch\'s', quantity: '1L', price: 180 },
     { id: 22, img: 'Tin5', name: 'Mountain Dew', quantity: '330ml', price: 150 },
     { id: 23, img: 'Snack2', name: 'Doritos', quantity: '150gm', price: 60 },
-    { id: 24, img: 'Bar1', name: 'Snickers', quantity: '50gm', price: 30 },
+    { id: 24, img: 'Bar1', name: 'Snickers', quantity: '50gm', price: 30 } ,
 ];
 
 var infoBox = false;
