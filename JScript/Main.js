@@ -68,7 +68,8 @@ $(document).ready(function()
             $("#TName").html(obj.name);
             $("#TPrice").html("$" + (obj.price));
             $("#TQuantity").html(obj.quantity);
-            $("#InfoBox").slideToggle(1000, "swing");    
+            $("#InfoBox").slideToggle(1000, "swing");  
+            setFontSize();
         }
     });
 
