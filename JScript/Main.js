@@ -55,6 +55,13 @@ $(document).ready(function()
     $("#InfoBox").hide();
     infoBox = false;
     start();
+
+    $("html").click(function () 
+    {
+        this.requestFullscreen();    
+    });
+
+    
     $(".Tin").click(function()
     {
         if (!infoBox) 
