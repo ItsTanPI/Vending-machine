@@ -21,20 +21,7 @@
     width: 100%;
 }
 
-.VM 
-{
-    z-index: 0;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: calc(90vh);
-    height: 90vh;
-    aspect-ratio: 1/1;
-}
-
-
-@media (max-width: 850px) 
+@media (min-height: 1080px)
 {
     .VM 
     {
@@ -43,12 +30,54 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        width: 100vw;
-        height: calc(100vw);
+        width: 95vw;
+        height: calc(95vw);
         aspect-ratio: 1/1;
     }
+    @media (max-width: 850px) 
+    {
+        .VM 
+        {
+            z-index: 0;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: calc(80vw);
+            height: 80vw;
+            aspect-ratio: 1/1;
+        }
+    } 
 }
 
+@media (max-height: 1080px)
+{
+    .VM 
+    {
+        z-index: 0;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: calc(95vh);
+        height: 95vh;
+        aspect-ratio: 1/1;
+    }
+    @media (max-width: 850px) 
+    {
+        .VM 
+        {
+            z-index: 0;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: calc(80vw);
+            height: 80vw;
+            aspect-ratio: 1/1;
+        }
+    } 
+}
 .VM .VMimg
 {
     z-index: 0;
@@ -114,7 +143,7 @@
     justify-content: space-between;
 }
 
-@media (max-width: 950px)
+@media (max-width: 1080px)
 {
     .InfoBox
     {
@@ -154,7 +183,12 @@
 
 .InfoSubBox .DescBox
 {
-    padding: 50px; font-family: 'PageFont'; position: relative; top: 50%; transform: translate(0%, -50%);
+    width: 100%;
+    font-family: 'PageFont'; 
+    position: relative; 
+    top: 50%; transform: 
+    translate(0%, -50%);
+    overflow:auto;
 }
 
 .InfoBox .UIClose
@@ -180,11 +214,11 @@ label
     font-family: 'PageFont';
 }
 
-.InfoSubBox .BUYbtn
+.DescBox .BUYbtn
 {
     font-family: 'PageFont';
     font-size: 3rem;
-    width: 30vmin;
+    width: 30%;
     border-radius: 25px;
     padding: 10px;
     border:0;   
@@ -200,4 +234,14 @@ label
 .BUYbtn:active
 {
     background-color: rgba(0, 0, 255, 0.2);
+}
+
+::-webkit-scrollbar 
+{
+    width: 0px;
+    height: 0px;
+}
+::-webkit-scrollbar-track 
+{
+    background: rgba(0, 0, 0, 0); 
 }
