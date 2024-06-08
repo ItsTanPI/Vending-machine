@@ -1,0 +1,94 @@
+<html>
+<head>
+    <title>Vending Machine Admin</title>
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background-color:wheat ;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            overflow:contain ;
+            padding: 20px;
+            background:rgb(173, 167, 157) ;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            color: #2b2020;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #8dafb2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #8dafb2;
+        }
+    </style>
+
+<script src = "https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src = "../JScript/Admin.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Restock Vending Machine</h1>
+        <form>
+            <label for="posId">Position ID:</label>
+            <input type="number" id="posId" name="posId">
+            
+            <label for="product">Product ID:</label>
+            <select id="product" name="product" required>
+                <option value="tin1">Coca Cola</option>
+                <option value="tin2">Pepsi</option>
+                <option value="tin3">Sprite</option>
+                <option value="tin4">Fanta</option>
+                <option value="tin5">Mountain Dew</option>
+                <option value="tin6">Red Bull</option>
+                <option value="tin7">Monster</option>
+                <option value="bottel1">Tropicana</option>
+                <option value="bottel2">Minute Maid</option>
+                <option value="bottel3">Simply Orange</option>
+                <option value="bottel4">Ocean Spray</option>
+                <option value="bottel5">Welch's</option>
+                <option value="snack1">Lay's</option>
+                <option value="snack2">Doritos</option>
+                <option value="snack3">Pringles</option>
+                <option value="snack4">Cheetos</option>
+                <option value="bar1">Snickers</option>
+                <option value="bar2">Hershey's</option>
+                <option value="bar3">Kit Kat</option>
+                <option value="bar4">Twix</option>
+            </select>
+            
+            <label for="stock">Stock:</label>
+            <input type="number" id="stock" name="stock" required>
+            
+        </form>
+        <button id = "rest"> Restock</button>
+    </div>
+
+</body>
+</html>

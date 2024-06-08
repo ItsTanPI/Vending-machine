@@ -1,0 +1,58 @@
+<html style="background-color: wheat;">
+
+<script src = "https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="../JScript/ClientInfo.js"></script>
+<style>
+
+@font-face 
+{
+    font-family: "PageFont";
+    src: url("../Assets/Fonts/Jua-Regular.woff") format('woff');
+}
+button
+{
+    font-family: 'PageFont';
+    font-size: 5rem;
+    width: 30%;
+    border-radius: 25px;    
+    padding: 10px;
+    border:0;   
+    color: white;
+    background-color: rgba(0, 0, 255, 0.5);
+}
+
+button:hover
+{
+    background-color: rgba(0, 0, 255, 0.7)
+}
+
+button:active
+{
+    background-color: rgba(0, 0, 255, 0.5);
+}
+p
+{
+    width: 100vw;
+    position: absolute; 
+    left: 50%; top:50%; 
+    transform: translate(-50%, -50%); 
+    font-family: 'PageFont';
+    font-size: 6rem;
+    text-align: center;
+}
+
+</style>
+
+<button id = "Start" style="width: 50%; height: 20%; font-size: 8rem;position: absolute; left: 50%; top:50%; transform: translate(-50%, -50%);">
+    Get Iteam
+</button>
+
+<img src="null" style="display: none; height: 90vh; width: 90vw; object-fit:scale-down; position: relative; left: 50%; top:50%; transform: translate(-50%, -50%);">
+<button id = "pay" style=" display: none; position: relative; bottom: 12.5%; left:50%; transform: translate(-50%, 0%);">PAY</button>
+<p id =  "Select" style="display: none;font-size: 80px;"> Select an Product <br> from <br> Vending Machine</p>
+
+<p id = "Content" style="display: none;"> Link Expired or Invalid</p>
+
+
+
+</html>

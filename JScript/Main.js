@@ -1,10 +1,21 @@
 var infoBox = false;
-var count = 0;
+var elem = document.getElementById("page");
 
-const dataToSend = 
+
+const currentURL = window.location.href;
+const url = new URL(currentURL);
+const params = new URLSearchParams(url.search);
+
+const URLcount = params.get('index');
+const URLToken = params.get('Token');
+
+var dataToSend = 
 {
     Table: 'Null',
-    index: 0
+    index: 0,
+    Buy: "NULL",
+    Stock : 0,
+    Token: 0
 };
 
 async function start() 
@@ -55,37 +66,78 @@ function ajax(dataToSend)
     });
 }
 
+function delay(ms) 
+{
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
+async function loop() 
+{
+    while (true) 
+    {
+        start();
+        await delay(1000);
+    }    
+
+}
+
+
+var curID;
 $(document).ready(async function()
 {
-    start();
+    
+    loop();
+    
     infoBox = false;
+    
     $(".Tin").click(async function()
     {
         if (!infoBox) 
         {    
-            var TinId = $(this).attr('id');
+            
+            var TinId = $(this).attr('id'); 
             dataToSend.Table = "Machine";
             dataToSend.index = TinId;
             var obj = await ajax(dataToSend);
-            console.log(obj);
 
             var pic = "../Assets/Vending/Tins/" + obj.img + ".png";
-            
+            curID = obj.img;
+
+
             $("#ProPic").attr("src", pic);
             $("#TName").html(obj.name);
             $("#TQuantity").html(obj.Quantity);
             $("#TPrice").html("₹" + (obj.price));
             
-            
             $("#InfoBox").slideToggle(1000, "swing");
             infoBox = true;
+            setFontSize();
         }
+        
     });
 
-    
+    $(".BUYbtn").click(async function () 
+    {
+        dataToSend.Table = "ClientBuy";
+        dataToSend.Buy = curID;
+        dataToSend.index = URLcount;
+        dataToSend.Token = URLToken;
+        var obj = await ajax(dataToSend); 
+        console.log(obj);
+    });
+
     $("#close").click(function()
     {
         Close();
     });    
 });
+
+
+function setFontSize() {
+    var parent = document.querySelector('.DescBox');
+    var child = document.querySelector('.BUYbtn');
+    var parentHeight = parent.offsetWidth;
+    child.style.fontSize = (parentHeight * 0.10) + 'px';
+}
+
+window.addEventListener('resize', setFontSize);
