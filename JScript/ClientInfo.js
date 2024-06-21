@@ -45,13 +45,36 @@ function delay(ms)
 }
 
 var state = false;
+var payed = false;
 
 var item;
 
 $(document).ready(async function()
 {
+    
+    $("#pay").hide();
     $("#Start").click(async function()
     {
+
+        dataToSend.Table = "Pay";
+        dataToSend.index = URLcount;
+        dataToSend.Token = URLToken;
+        dataToSend.Buy = "404";
+        console.log(dataToSend);
+        var obj = await ajax(dataToSend);
+        console.log(obj);
+        if (obj.Type == "Already Exist") 
+        {
+            payed = true;
+            console.log("yes");
+            var pic = "../Assets/Vending/Tins/" + obj.name + ".png";
+            $("#Select").hide();
+            $("img").attr("src", pic);
+            $("img").show();
+            $(this).hide();
+            return;
+        }
+
         var obj = {Token : null, Server : null, ClientD :null, ProductId : null}
 
 
@@ -67,8 +90,8 @@ $(document).ready(async function()
             dataToSend.Token = URLToken;
             obj = await ajax(dataToSend);
             $(this).hide();
-            $("#Select").show();
-            $("#pay").show();
+            
+            
         }
         else
         {
@@ -79,10 +102,11 @@ $(document).ready(async function()
 
         await delay(10);
 
-        while (state)
+        
+        $("#Select").show();
+        while (state && !payed)
         {
             
-
             dataToSend.Table = "Client";
             dataToSend.index = URLcount;
             obj = await ajax(dataToSend);
@@ -92,14 +116,13 @@ $(document).ready(async function()
                 item = obj.ProductId;
                 console.log(item);
                 var pic = "../Assets/Vending/Tins/" + item + ".png";
+                $("#pay").show();
                 $("#Select").hide();
                 $("img").attr("src", pic);
                 $("img").show();
-                
                 await delay(1000);
             }
-        }    
-     
+        }
     });  
 
 
@@ -131,8 +154,9 @@ $(document).ready(async function()
         var obj = await ajax(dataToSend);
         console.log(obj);
 
-        if (obj) 
+        if (obj.Type != "Already Exist") 
         {
+            payed = true;
             $("#pay").hide();
             $("#Sucess").show();
             lottie.loadAnimation({
