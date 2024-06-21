@@ -114,14 +114,6 @@ function Update($con)
 
 function Pay($con, $index, $Token, $buy)
 {
-    $query = "select * from Product where proID = '$buy';";
-    mysqli_query($con, $query);
-    $result = mysqli_query($con, $query);
-    $row = mysqli_fetch_assoc($result);
-    
-    $Name = $row["Name"];
-    $Price = $row["price"];
-
     $query = "Select * from purchase where PurchaseID = $index AND Token = '$Token';";
     $result = mysqli_query($con, $query);
     $row = mysqli_fetch_assoc($result);
@@ -129,22 +121,35 @@ function Pay($con, $index, $Token, $buy)
     if($row) 
     {
         
-        $data = ['Type' => "Already Exist"];
-        //$data = ['name' => $row["ProductName"], 'price' => $row["Price"]];
+        $data = ['Type' => "Already Exist", 'name' => $row["proId"]];
         $jsonResponse = json_encode($data);
         echo $jsonResponse;
+
         return;
     }
-    else 
+    elseif ($buy != "404")
     {
-        $query = "Insert Into purchase(PurchaseID, Token, ProductName, Price) values($index, $Token, '$Name', $Price);";
+        $query = "select * from Product where proID = '$buy';";
+        mysqli_query($con, $query);
+        $result = mysqli_query($con, $query);
+        $row = mysqli_fetch_assoc($result);
+        
+        $Name = $row["Name"];
+        $Price = $row["price"];
+        
+        $query = "Insert Into purchase(PurchaseID, Token, ProductName, Price, proId) values($index, $Token, '$Name', $Price, '$buy');";
         $result = mysqli_query($con, $query);
 
         $data = ['Type' => "Success"];
         $jsonResponse = json_encode($data);
         echo $jsonResponse;
+        return;
+
     }
 
+    $data = ['Type' => "null"];
+    $jsonResponse = json_encode($data);
+    echo $jsonResponse;
     
 }
 
