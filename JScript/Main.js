@@ -22,6 +22,7 @@ async function start()
 {
     dataToSend.Table = 'ALL';
     var obj = await ajax(dataToSend);
+    //console.log(obj);
     for (let index = 1; index < 25; index++) 
     {
         var ID = "#" + index.toString() + "H";
@@ -122,8 +123,7 @@ $(document).ready(async function()
         dataToSend.Buy = curID;
         dataToSend.index = URLcount;
         dataToSend.Token = URLToken;
-        var obj = await ajax(dataToSend); 
-        console.log(obj);
+        await ajax(dataToSend); 
     });
 
     $("#close").click(function()

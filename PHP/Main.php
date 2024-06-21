@@ -112,6 +112,42 @@ function Update($con)
 }
 
 
+function Pay($con, $index, $Token, $buy)
+{
+    $query = "select * from Product where proID = '$buy';";
+    mysqli_query($con, $query);
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+    
+    $Name = $row["Name"];
+    $Price = $row["price"];
+
+    $query = "Select * from purchase where PurchaseID = $index AND Token = '$Token';";
+    $result = mysqli_query($con, $query);
+    $row = mysqli_fetch_assoc($result);
+    
+    if($row) 
+    {
+        
+        $data = ['Type' => "Already Exist"];
+        //$data = ['name' => $row["ProductName"], 'price' => $row["Price"]];
+        $jsonResponse = json_encode($data);
+        echo $jsonResponse;
+        return;
+    }
+    else 
+    {
+        $query = "Insert Into purchase(PurchaseID, Token, ProductName, Price) values($index, $Token, '$Name', $Price);";
+        $result = mysqli_query($con, $query);
+
+        $data = ['Type' => "Success"];
+        $jsonResponse = json_encode($data);
+        echo $jsonResponse;
+    }
+
+    
+}
+
 if ($Type == 'ALL') 
 {
     ALL($con);
@@ -143,6 +179,10 @@ elseif ($Type == "QR")
 elseif ($Type == "Update") 
 {
     Update($con);
+}
+elseif ($Type == "Pay") 
+{
+    Pay($con, $index, $Token, $buy);
 }
 
 $con->close();
