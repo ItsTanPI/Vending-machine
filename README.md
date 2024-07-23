@@ -3,4 +3,4 @@ Simulation of vending machine.
 
 A Learning project.
 
-https://itstanpi.github.io/Vending-machine/
+DEMO: https://itstanpi.github.io/Vending-machine/
