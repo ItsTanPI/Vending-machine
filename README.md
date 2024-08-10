@@ -48,6 +48,10 @@ The Vending Machine Simulation project allows users to interact with a virtual v
    - Log in to the admin dashboard.
    - View sales history, restock products, update prices, and manage inventory.
 
+## Asset Credits
+
+- Vending Machine assets used in this project are provided by [Freepik](https://www.freepik.com/free-vector/vending-machines-snacks-set-chips-bars-canned-drinks-automate-with-empty-shelves_12699886.htm#query=vending%20machine&position=29&from_view=keyword&track=ais_hybrid&uuid=96d21d59-c9e9-4c13-86cc-1719c52d6282).
+
 ## Contributing
 
 Feel free to fork the repository, create a branch, and submit pull requests. Contributions are welcome!
