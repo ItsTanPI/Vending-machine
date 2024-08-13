@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Availability of Tins</title>
+    <link rel="stylesheet" href="../Lib/bootstrap.min.css">
+    <script src="../Lib/jquery.js"></script>
+
+
+    <style>
+		@font-face 
+		{
+    		font-family: "PageFont";
+    		src: url("../Assets/Fonts/Jua-Regular.woff") format('woff');
+		}
+
+        .container
+        {
+            background-color:  rgba(150, 150, 150, 0.2);
+            backdrop-filter: blur(25Px);
+
+            border-color:  rgba(50, 50, 50, 0.2);
+            border-style: solid;
+            border-width: 25px;
+
+            justify-content: space-between;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);            
+        }
+
+        button 
+        {
+            font-family: 'PageFont';
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            background: #8dafb2;
+            color: white;
+            font-size: 50px;
+            cursor: pointer;
+            background-color: rgba(0, 0, 255, 0.2);
+        }
+
+        button:hover 
+        {
+            background-color: rgba(0, 0, 255, 0.5)
+        }
+
+        button:active
+        {
+            background-color: rgba(0, 0, 255, 0.2);
+        }
+
+
+        .styled-date 
+        {
+            width: 200px;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+
+        .styled-date:focus 
+        {
+            outline: none;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }	
+    </style>
+
+    <script>
+        var dataToSend = 
+        {
+            Table: 'Null',
+            index: 0,
+            Buy: "NULL",
+            Stock : 0,
+            Token: 0,
+            branch:"vending"
+        };
+
+        var price = [];
+        var NameData = [];
+        var id = [];
+        async function Reset() 
+        {
+            dataToSend.branch = $("#Branch").val();
+            //console.log(dataToSend.branch); 
+            await $.ajax({
+                url: '../PHP/UserData.php',
+                method: 'POST',
+                data: dataToSend,
+                dataType: 'json',
+                success: function(response) {
+                    let products = response;
+                    let tableContent = '';
+                    var index = 0;
+                    products.forEach(product => {
+                        price[index] = product.price;
+                        id[index] = product.proID;
+                        NameData[index] = product.Name;
+                        index++;
+                        tableContent += `<tr>
+                            <td>${index}</td>
+                                            <td>${product.Pno}</td>
+                                            <td>
+                                                ${product.Wallet}
+                                            </td>
+
+                                            <td>
+                                                ${product.pass}
+                                            </td>
+                                        </tr>`;
+                                        });
+                                        //<input type ="" id ='${product.proID}N' value = "" style = "background-color: rgba(100, 100, 100, 0.3); border: 0; text-align:center; border-radius:5px; width:140px;">
+                    $('#availabilityTable').html(tableContent);
+                }
+            });
+        }
+
+
+        var tempBrc;
+        function delay(ms)
+        {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+
+
+        $(document).ready(async function()
+        {
+            tempBrc = $("#Branch").val();
+            await Reset();
+
+            $("#Reset").click(async function()
+            {
+                await Reset();
+            });
+
+            $("#Update").click(async function()
+            {
+                await Update();
+
+            });
+        });
+    </script>
+</head>
+<body style="background-color: wheat; font-family: 'PageFont';" >
+    
+    <br><br><b><center><label style="font-size: 60px;" class="container"> User Accounts </label></center></b><br><br>
+    <div class="container">
+        <table class="table table-striped" style="font-size: 20px;">
+            <thead>
+                <tr>
+                    <th>S.no</th>
+                    <th>Phone Number</th>
+                    <th>Wallet</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+            <tbody id="availabilityTable">
+                
+            </tbody>
+        </table>
+    </div>
+    <br><br><br>
+    <!--center>
+    <button id = "Update" >Update</button> &nbsp; &nbsp; &nbsp; &nbsp;
+    <button id = 'Reset'>Reset</button>
+    </center-->
+    <br><br>
+</body>
+</html>

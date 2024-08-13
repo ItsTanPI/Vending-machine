@@ -4,7 +4,8 @@ var dataToSend =
     index: 0,
     Buy: "NULL",
     Stock : 0,
-    Token: 0
+    Token: 0,
+    branch:"vending"
 };
 
 function ajax(dataToSend) 
@@ -36,17 +37,17 @@ $(document).ready(async function()
     $("#rest").click(async function()
     {
         var pos = $("#posId").val();
-        var Pro = $('#product').val();
         var Stock = $('#stock').val();
 
         dataToSend.Table = "Admin";
         dataToSend.index = pos;
-        dataToSend.Buy = Pro;
         dataToSend.Stock = Stock;
-        console.log(dataToSend);
+        //console.log($("#Branch").val());
+        dataToSend.branch = $("#Branch").val();
+        //console.log(dataToSend);
 
         obj = await ajax(dataToSend);
-        console.log(obj);
+        //console.log(obj);
                 
     });  
 });

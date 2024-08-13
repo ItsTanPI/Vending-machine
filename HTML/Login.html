@@ -1,7 +1,10 @@
-<html>
+<html lang="en">
 <head>
-    <title>Vending Machine Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src = "../Lib/jquery.js"></script>
 
+    <title>Login Page</title>
     <style>
 		@font-face 
 		{
@@ -9,13 +12,13 @@
     		src: url("../Assets/Fonts/Jua-Regular.woff") format('woff');
 		}
 	</style>
-
     <style>
         body {
             font-family: Georgia, 'Times New Roman', Times, serif;
             background-color:wheat ;
             margin: 0;
             padding: 0;
+            justify-content: center;
         }
         .container {
 
@@ -38,6 +41,7 @@
 
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-top: 50px;
+            justify-content: center;
         }
         h1 {
             text-align: center;
@@ -64,7 +68,7 @@
             border-radius: 25px;
             background: #8dafb2;
             color: white;
-            font-size: 16px;
+            font-size: 50px;
             cursor: pointer;
             background-color: rgba(0, 0, 255, 0.2);
         }
@@ -84,39 +88,48 @@
         }
     </style>
 
-<script src="../Lib/jquery.js"></script>
-<script src = "../JScript/Admin.js"></script>
+    <script>
+        $(document).ready(function() 
+        {
+            $('#Enter').click(function() 
+            {
+                event.preventDefault(); 
+
+                var username = $('#username').val();
+                var password = $('#password').val();
+
+                console.log("64465");
+
+                var validUsername = 'admin';
+                var validPassword = '1234';
+
+                if (username === validUsername && password === validPassword) {
+
+
+                    window.location.href = "dashboard.html";
+                    console.log("sdsd");
+                }
+                else {
+                    $('#error-message').show();
+                }
+            });
+        });
+    </script>
 </head>
 <body style="background-color: wheat; font-family: 'PageFont';" >
-    
-    <div class="split-container">
-        <div class="container" style="flex: 35%; margin: 50px; height: 37%;">
-            <h1>Restock Vending Machine</h1>
-            <form>
-
-                <label for="product">Branch:</label>
-                    <select id="Branch" name="Branch" required class = "styled-date">
-                        <option value="vending">Branch-1</option>
-                        <option value="vending1">Branch-2</option>
-                    </select>      
-
-
-                <label for="posId">Position ID:</label>
-                <input type="number" id="posId" name="posId">
-
-
-
-                <label for="stock">Stock:</label>
-                <input type="number" id="stock" name="stock" required>
-
-            </form>
-            <button id = "rest"> Restock</button>
-        </div>
-        <br><br>
-        <div style="flex: 65%;">
-            <iframe id = "iframe1" src="stock.html" title="admin" style="height: 100%; width: 100%;" frameborder="0"></iframe>
-        </div>
+    <div class="container">
+        <center><label style="font-size: 80px;">Log In</label></center>
+        <form id="loginForm" autocomplete="off">
+            
+            <center><label for="username" style="font-size: 30px;">Username</label></center><br>
+            <input type="text" id="username" name="username" required style="font-size: 30px;">
+            
+          
+            <center><label for="username" style="font-size: 30px;">Password</label></center><br>
+            <input type="password" id="password" name="password" required style="font-size: 30px;"><br><br>
+            <button id = "Enter">Login</button>
+        </form>
+        <p id="error-message" style="display:none; color:red;">Invalid username or password</p>
     </div>
-
 </body>
 </html>

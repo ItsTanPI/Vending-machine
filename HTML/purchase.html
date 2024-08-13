@@ -1,0 +1,154 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Availability of Tins</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Lib/bootstrap.min.css">
+
+    
+	<script src = "../Lib/jquery.js"></script>
+    
+    
+    <script src="../Lib/chart.js"></script>
+
+    <script src = "../JScript/Purchase.js">
+
+    </script>
+
+    <style>
+
+    @font-face 
+    {
+        font-family: "PageFont";
+        src: url("../Assets/Fonts/Jua-Regular.woff") format('woff');
+    }
+
+
+        .styled-date {
+            width: 200px;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .styled-date:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .filter-section, .chart-section, .table-section {
+            margin: 20px;
+            padding: 40px;
+            background-color:  rgba(150, 150, 150, 0.2);
+            backdrop-filter: blur(25Px);
+
+            border-color:  rgba(50, 50, 50, 0.2);
+            border-style: solid;
+            border-width: 25px;
+
+            justify-content: space-between;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .Hello
+        {
+            background-color:  rgba(150, 150, 150, 0.2);
+            backdrop-filter: blur(25Px);
+
+            border-color:  rgba(50, 50, 50, 0.2);
+            border-style: solid;
+            border-width: 25px;
+            width: 97%;
+
+            justify-content: space-between;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body style="background-color: wheat; font-family: 'PageFont'; ">
+
+    <div class="container">
+        <br><br><b><center><label style="font-size: 60px;" class="Hello">Sales History</label></center></b><br><br>
+        
+        <div class="filter-section">
+            <center><h3><b>Filter</b></h3><br>
+                
+            <h3>Branch</h3>
+            <h3><select id="Branch" name="Branch" required class = "styled-date">
+                <option value="All">ALL</option>
+                <option value="vending">Branch-1</option>
+                <option value="vending1">Branch-2</option>
+            </select></h3>      
+            <h3>Date</h3>
+            <h3>From: <input type="date" class="styled-date" id="Date" style="width: 30%;"></h3>
+            <h3>To: <input type="date" class="styled-date" id="To" style="width: 30%;"></h3>
+            
+
+            <br>
+            <h3>Product</h3>
+            <h3>Name:
+            <select id="product" name="product" class="styled-date">
+                <option value="all">All</option>
+                <option value="tin1">Cola</option>
+                <option value="tin2">Pinapple</option>
+                <option value="tin3">Lime</option>
+                <option value="tin4">Coconut Water</option>
+                <option value="tin5">Soda</option>
+                <option value="tin6">Energy</option>
+                <option value="tin7">Jungle</option>
+                <option value="bottel1">Tropicana</option>
+                <option value="bottel2">Minute Maid</option>
+                <option value="bottel3">Simply Orange</option>
+                <option value="bottel4">Ocean Spray</option>
+                <option value="bottel5">Welch's</option>
+                <option value="snack1">Lay's</option>
+                <option value="snack2">Doritos</option>
+                <option value="snack3">Pringles</option>
+                <option value="snack4">Cheetos</option>
+                <option value="bar1">Snickers</option>
+                <option value="bar2">Hershey's</option>
+                <option value="bar3">Kit Kat</option>
+                <option value="bar4">Twix</option>
+            </select>
+            </h3>
+
+            </center>
+        </div>
+
+        <div class="chart-section">
+            <center><h3><b>Details</b></h3></center><br>
+            <center><label id = "Info"> </label></center>
+
+        </div>
+
+        <div class="chart-section">
+            <center><h3><b>Chart</b></h3></center>
+            <canvas id="purchase-chart" width="400" height="200"></canvas>
+        </div>
+
+
+        <div class="table-section">
+            <center><h3><b>Table</b></h3></center>
+            <table class="table table-striped" style="font-size: 20px;">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Time & Date</th>
+                        <th>Branch</th>
+                    </tr>
+                </thead>
+                <tbody id="availabilityTable">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br><br>
+</body>
+</html>

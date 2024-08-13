@@ -1,0 +1,370 @@
+<html style="background-color: wheat;">
+
+<head>
+    <script src="../Lib/jquery.js"></script>
+    <script src="../Lib/matter.js"></script>
+    <script src="../Lib/matter-wrap.js  "></script>
+    <script src = "../JScript/OTP.js"></script>
+</head>
+
+
+<style>
+
+    @font-face 
+    {
+        font-family: "PageFont";
+        src: url("../Assets/Fonts/Jua-Regular.woff") format('woff');
+    }
+    
+    .Screen
+            {
+                position: absolute;
+                height: 98vh;
+                width: 98%;
+                z-index: -100;
+                display: flex;
+            }
+    button
+    {
+        font-family: 'PageFont';
+        font-size: 5rem;
+        width: 30%;
+        border-radius: 25px;    
+        padding: 10px;
+        border:0;   
+        color: white;
+        background-color: rgba(0, 0, 255, 0.5);
+    }
+    
+    button:hover
+    {
+        background-color: rgba(0, 0, 255, 0.7)
+    }
+    
+    button:active
+    {
+        background-color: rgba(0, 0, 255, 0.5);
+    }
+    p
+    {
+        width: 100vw;
+        position: absolute; 
+        left: 50%; top:50%; 
+        transform: translate(-50%, -50%); 
+        font-family: 'PageFont';
+        font-size: 6rem;
+        text-align: center;
+    }
+    
+    #svgContainer {
+      max-width: 20%;
+      max-height: 20%;
+      background-image: linear-gradient(70deg, #f0f0f0 10%, #ffffff 100%);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      text-align: center;
+    }
+    
+    #svgContainer svg {
+      width: 20%!important;
+    }
+    
+    .container
+            {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                background-color:  rgba(150, 150, 150, 0.2);
+                backdrop-filter: blur(25Px);
+    
+                width: 80vw;
+                height: 60vh;
+    
+                border-color:  rgba(50, 50, 50, 0.2);
+                border-style: solid;
+                border-width: 25px;
+                text-align: center;
+                justify-content: center;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+    
+            .styled-date {
+                font-family: 'PageFont';
+           
+                border-radius: 50px;
+                padding: 10px;
+                font-size: 1em;
+                text-align: center;
+                border: none;
+                border-radius: 5px;
+                box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+                background: rgba(255, 255, 255, 0.5);
+            }
+    
+            .styled-date:focus {
+                font-family: 'PageFont';
+                outline: none;
+                background: rgba(255, 255, 255, 0.8);
+                box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+            }
+    
+    
+            .pinBox {
+      --width: 296px;
+      --height: 74px;
+      --spacing: 47px;
+      
+      display: inline-block;
+      position: relative;
+      width: var(--width);
+      height: var(--height);
+      background-image: url(https://i.sstatic.net/JbkZl.png); 
+    }
+    
+    .pinEntry {
+      position: absolute;
+      padding-left: 21px;
+      font-family: courier, monospaced;
+      font-size: var(--spacing);
+      height: var(--height);
+      letter-spacing: var(--spacing);
+      background-color: transparent;
+      border: 0;
+      outline: none;
+      clip: rect(0px, calc(var(--width) - 21px), var(--height), 0px);
+    }
+    
+    
+    .flex
+    {
+      background-color:rgba(255, 255, 255, 0.5);
+      margin: 10%;
+      padding: 20px;
+    }
+    
+    button {
+                font-family: 'PageFont';
+                padding: 10px;
+                border: none;
+                border-radius: 25px;
+                background: #8dafb2;
+                color: white;
+                font-size: 10vmin;
+                cursor: pointer;
+                background-color: rgba(0, 0, 255, 0.2);
+                backdrop-filter: blur(25Px);
+     
+            }
+            button:hover {
+                background-color: rgba(0, 0, 255, 0.5)
+            }
+    
+            button:active
+            {
+                background-color: rgba(0, 0, 255, 0.2);
+            }
+    </style>
+    
+    <style>
+        @media (min-height: 1080px)
+    {
+        .VM 
+        {
+            z-index: 0;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 95vw;
+            height: calc(95vw);
+            aspect-ratio: 1/1;
+        }
+        @media (max-width: 850px) 
+        {
+            .VM 
+            {
+                z-index: 0;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: calc(80vw);
+                height: 80vw;
+                aspect-ratio: 1/1;
+            }
+        } 
+    
+        .InfoBox
+        {
+            position: absolute;
+            height: 65%;
+            width: 80%;
+            z-index: 100;
+            background-color:  rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(25Px);
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+            border-color:  rgba(50, 50, 50, 0.2);
+            border-style: solid;
+            border-width: 25px;
+    
+            justify-content: space-between;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    }
+    
+    
+    @media (max-height: 1080px)
+    {
+        .VM 
+        {
+            z-index: 0;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: calc(95vh);
+            height: 95vh;
+            aspect-ratio: 1/1;
+        }
+        @media (max-width: 850px) 
+        {
+            .VM 
+            {
+                z-index: 0;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: calc(80vw);
+                height: 80vw;
+                aspect-ratio: 1/1;
+            }
+    
+            .InfoBox
+            {
+                position: absolute;
+                height: 50%;
+                width: 80%;
+                z-index: 100;
+                background-color:  rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(25Px);
+                transform: translate(-50%, -50%);
+                left: 50%;
+                top: 50%;
+                border-color:  rgba(50, 50, 50, 0.2);
+                border-style: solid;
+                border-width: 25px;
+    
+                justify-content: space-between;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+        } 
+        @media (min-width: 850px) 
+        {
+            .InfoBox
+            {
+                position: absolute;
+                height: 80%;
+                width: 80%;
+                z-index: 100;
+                background-color:  rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(25Px);
+                transform: translate(-50%, -50%);
+                left: 50%;
+                top: 50%;
+                border-color:  rgba(50, 50, 50, 0.2);
+                border-style: solid;
+                border-width: 25px;
+                justify-content: space-between;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+        }
+    
+    }
+    
+    .UIClose
+    {
+        position: absolute;
+        left: 100%;
+        width: 70px;
+        height: 70px;
+        top: 0%;
+        transform: translate(-100%, 0);
+        background-color: rgba(255, 0, 0, 0.5);
+        border-radius: 0 0 0 50%;
+    }
+    
+    .UICloseimg
+    {
+        width: 100%;
+        height: 100%;
+    }
+    </style>
+
+
+<script>
+    !function(t,e){if("object"==typeof exports&&"object"==typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var n=e();for(var o in n)("object"==typeof exports?exports:t)[o]=n[o]}}(self,(()=>(()=>{"use strict";var t={737:(t,e)=>{
+Object.defineProperty(e,"__esModule",{value:!0});var n=function(){function t(t,e,n){this.el=t,this.options=e,this.events=n,this.el=t,this.options=e,this.events={}}return t.prototype.createCollection=function(t,e){var n;t.push({id:(null===(n=null==e?void 0:e.el)||void 0===n?void 0:n.id)||t.length+1,element:e})},t.prototype.fireEvent=function(t,e){if(void 0===e&&(e=null),this.events.hasOwnProperty(t))return this.events[t](e)},t.prototype.on=function(t,e){this.events[t]=e},t}();e.default=n},659:function(t,e,n){
+
+var o,i=this&&this.__extends||(o=function(t,e){return o=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,e){t.__proto__=e}||function(t,e){for(var n in e)Object.prototype.hasOwnProperty.call(e,n)&&(t[n]=e[n])},o(t,e)},function(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Class extends value "+String(e)+" is not a constructor or null");function n(){this.constructor=t}o(t,e),t.prototype=null===e?Object.create(e):(n.prototype=e.prototype,new n)}),r=this&&this.__assign||function(){return r=Object.assign||function(t){for(var e,n=1,o=arguments.length;n<o;n++)for(var i in e=arguments[n])Object.prototype.hasOwnProperty.call(e,i)&&(t[i]=e[i]);return t},r.apply(this,arguments)},s=this&&this.__importDefault||function(t){return t&&t.__esModule?t:{default:t}};Object.defineProperty(e,"__esModule",{value:!0});var u=n(969),a=function(t){function e(e,n){var o=t.call(this,e,n)||this,i=e.getAttribute("data-hs-pin-input"),s=i?JSON.parse(i):{},u=r(r({},s),n);return o.items=o.el.querySelectorAll("[data-hs-pin-input-item]"),o.currentItem=null,o.currentValue=new Array(o.items.length).fill(""),o.placeholders=[],o.availableCharsRE=new RegExp((null==u?void 0:u.availableCharsRE)||"^[a-zA-Z0-9]+$"),o.init(),o}return i(e,t),e.prototype.init=function(){this.createCollection(window.$hsPinInputCollection,this),this.items.length&&this.build()},e.prototype.build=function(){this.buildInputItems()},e.prototype.buildInputItems=function(){var t=this;this.items.forEach((function(e,n){t.placeholders.push(e.getAttribute("placeholder")||""),e.hasAttribute("autofocus")&&t.onFocusIn(n),e.addEventListener("input",(function(e){return t.onInput(e,n)})),e.addEventListener("paste",(function(e){return t.onPaste(e)})),e.addEventListener("keydown",(function(e){return t.onKeydown(e,n)})),e.addEventListener("focusin",(function(){return t.onFocusIn(n)})),e.addEventListener("focusout",(function(){return t.onFocusOut(n)}))}))},e.prototype.checkIfNumber=function(t){return t.match(this.availableCharsRE)},e.prototype.autoFillAll=function(t){var e=this;Array.from(t).forEach((function(t,n){if(!(null==e?void 0:e.items[n]))return!1;e.items[n].value=t,e.items[n].dispatchEvent(new Event("input",{bubbles:!0}))}))},e.prototype.setCurrentValue=function(){this.currentValue=Array.from(this.items).map((function(t){return t.value}))},e.prototype.toggleCompleted=function(){this.currentValue.includes("")?this.el.classList.remove("active"):this.el.classList.add("active")},e.prototype.onInput=function(t,e){var n=t.target.value;if(this.currentItem=t.target,this.currentItem.value="",this.currentItem.value=n[n.length-1],!this.checkIfNumber(this.currentItem.value))return this.currentItem.value=this.currentValue[e]||"",!1;if(this.setCurrentValue(),this.currentItem.value){if(e<this.items.length-1&&this.items[e+1].focus(),!this.currentValue.includes("")){var o={currentValue:this.currentValue};this.fireEvent("completed",o),(0,u.dispatch)("completed.hs.pinInput",this.el,o)}this.toggleCompleted()}else e>0&&this.items[e-1].focus()},e.prototype.onKeydown=function(t,e){"Backspace"===t.key&&e>0&&(""===this.items[e].value?(this.items[e-1].value="",this.items[e-1].focus()):this.items[e].value=""),this.setCurrentValue(),this.toggleCompleted()},e.prototype.onFocusIn=function(t){this.items[t].setAttribute("placeholder","")},e.prototype.onFocusOut=function(t){this.items[t].setAttribute("placeholder",this.placeholders[t])},e.prototype.onPaste=function(t){var e=this;t.preventDefault(),this.items.forEach((function(n){document.activeElement===n&&e.autoFillAll(t.clipboardData.getData("text"))}))},e.getInstance=function(t,e){var n=window.$hsPinInputCollection.find((function(e){return e.element.el===("string"==typeof t?document.querySelector(t):t)}));return n?e?n:n.element:null},e.autoInit=function(){window.$hsPinInputCollection||(window.$hsPinInputCollection=[]),document.querySelectorAll("[data-hs-pin-input]:not(.--prevent-on-load-init)").forEach((function(t){window.$hsPinInputCollection.find((function(e){var n;return(null===(n=null==e?void 0:e.element)||void 0===n?void 0:n.el)===t}))||new e(t)}))},e}(s(n(737)).default);window.addEventListener("load",(function(){a.autoInit()})),"undefined"!=typeof window&&(window.HSPinInput=a),e.default=a},969:function(t,e){var n=this;Object.defineProperty(e,"__esModule",{value:!0}),e.menuSearchHistory=e.classToClassList=e.htmlToElement=e.afterTransition=e.dispatch=e.debounce=e.isFormElement=e.isParentOrElementHidden=e.isEnoughSpace=e.isIpadOS=e.isIOS=e.getClassPropertyAlt=e.getClassProperty=e.stringToBoolean=void 0;e.stringToBoolean=function(t){return"true"===t};e.getClassProperty=function(t,e,n){return void 0===n&&(n=""),(window.getComputedStyle(t).getPropertyValue(e)||n).replace(" ","")};e.getClassPropertyAlt=function(t,e,n){void 0===n&&(n="");var o="";return t.classList.forEach((function(t){t.includes(e)&&(o=t)})),o.match(/:(.*)]/)?o.match(/:(.*)]/)[1]:n};e.isIOS=function(){return!!/iPad|iPhone|iPod/.test(navigator.platform)||navigator.maxTouchPoints&&navigator.maxTouchPoints>2&&/MacIntel/.test(navigator.platform)};e.isIpadOS=function(){return navigator.maxTouchPoints&&navigator.maxTouchPoints>2&&/MacIntel/.test(navigator.platform)};e.isEnoughSpace=function(t,e,n,o,i){void 0===n&&(n="auto"),void 0===o&&(o=10),void 0===i&&(i=null);var r=e.getBoundingClientRect(),s=i?i.getBoundingClientRect():null,u=window.innerHeight,a=s?r.top-s.top:r.top,l=(i?s.bottom:u)-r.bottom,c=t.clientHeight+o;return"bottom"===n?l>=c:"top"===n?a>=c:a>=c||l>=c};e.isFormElement=function(t){return t instanceof HTMLInputElement||t instanceof HTMLTextAreaElement||t instanceof HTMLSelectElement};var o=function(t){return!!t&&("none"===window.getComputedStyle(t).display||o(t.parentElement))};e.isParentOrElementHidden=o;e.debounce=function(t,e){var o;return void 0===e&&(e=200),function(){for(var i=[],r=0;r<arguments.length;r++)i[r]=arguments[r];clearTimeout(o),o=setTimeout((function(){t.apply(n,i)}),e)}};e.dispatch=function(t,e,n){void 0===n&&(n=null);var o=new CustomEvent(t,{detail:{payload:n},bubbles:!0,cancelable:!0,composed:!1});e.dispatchEvent(o)};e.afterTransition=function(t,e){var n=function(){e(),t.removeEventListener("transitionend",n,!0)};window.getComputedStyle(t,null).getPropertyValue("transition")!==(navigator.userAgent.includes("Firefox")?"all":"all 0s ease 0s")?t.addEventListener("transitionend",n,!0):e()};e.htmlToElement=function(t){var e=document.createElement("template");return t=t.trim(),e.innerHTML=t,e.content.firstChild};e.classToClassList=function(t,e,n,o){void 0===n&&(n=" "),void 0===o&&(o="add"),t.split(n).forEach((function(t){return"add"===o?e.classList.add(t):e.classList.remove(t)}))};e.menuSearchHistory={historyIndex:-1,addHistory:function(t){this.historyIndex=t},existsInHistory:function(t){return t>this.historyIndex},clearHistory:function(){this.historyIndex=-1}}}},e={};var n=function n(o){var i=e[o];if(void 0!==i)return i.exports;var r=e[o]={exports:{}};return t[o].call(r.exports,r,r.exports,n),r.exports}(659);return n})()));
+</script>
+
+
+
+<div id = "Screen" class="Screen" style="background-color:transparent; pointer-events: none;  "></div>
+
+<div class="InfoBox" style="text-align: center; display: block; height: 45%;" id = "numberBox">
+    <br><br>  
+    <b style="font-size: 6vmin; font-family: 'PageFont';">Reset Password
+        <br>
+    <h1><b style="font-size: 5vmin; font-family: 'PageFont';">Phone Number<br>
+        <input id = "PhoneNum" type="number" class="styled-date" style="width: 80%;" maxlength="10" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==10) return false; " >
+    </h1>
+    
+    <label id = "LogInLog" style="color :red ; display: none;" >Incorrect PIN</label><br>
+    <button id = "SendOTP" style="width: 60%;">Send OTP</button>
+    <label><br></label><br>
+
+    <button id = "EnterOTP" style="width: 50%; font-size: 5vmin;">Enter OTP</button>
+
+
+</div>
+
+
+
+<div class="InfoBox" style="text-align: center; height: 50%; display: none;" id = "OTPBox">
+    <h1><b style="font-size: 5vmin; font-family: 'PageFont'; ">OTP</b><br>
+        <div data-hs-pin-input style="display: flex; width: 100%; left: 0;">
+            <input id = "OTP1"type="number" pattern="[0-9]*" inputmode="numeric" data-hs-pin-input-item class = "styled-date" style="font-size: 7vmin; width:  20%; height: 8%; margin-left: 5%; margin-right: 5%;">
+            <input id = "OTP2"type="number" pattern="[0-9]*" inputmode="numeric" data-hs-pin-input-item class = "styled-date" style="font-size: 7vmin; width:  20%; height: 8%; margin-left: 5%; margin-right: 5%;">
+            <input id = "OTP3"type="number" pattern="[0-9]*" inputmode="numeric" data-hs-pin-input-item class = "styled-date" style="font-size: 7vmin; width:  20%; height: 8%; margin-left: 5%; margin-right: 5%;">
+            <input id = "OTP4"type="number" pattern="[0-9]*" inputmode="numeric" data-hs-pin-input-item class = "styled-date" style="font-size: 7vmin; width:  20%; height: 8%; margin-left: 5%; margin-right: 5%;">
+            <input id = "OTP5"type="number" pattern="[0-9]*" inputmode="numeric" data-hs-pin-input-item class = "styled-date" style="font-size: 7vmin; width:  20%; height: 8%; margin-left: 5%; margin-right: 5%;">
+        </div> 
+    </h1>
+
+    
+    <h1><b style="font-size: 5vmin; font-family: 'PageFont'; "> NEW PIN</b><br>
+        <div data-hs-pin-input style="display: flex; width: 100%; left: 0;">
+            <input id = "pass1"type="password" pattern="[0-9]*" inputmode="numeric" data-hs-pin-input-item class = "styled-date" style="font-size: 7vmin; width:  20%; height: 10%; margin-left: 5%; margin-right: 5%;">
+            <input id = "pass2"type="password" pattern="[0-9]*" inputmode="numeric" data-hs-pin-input-item class = "styled-date" style="font-size: 7vmin; width:  20%; height: 10%; margin-left: 5%; margin-right: 5%;">
+            <input id = "pass3"type="password" pattern="[0-9]*" inputmode="numeric" data-hs-pin-input-item class = "styled-date" style="font-size: 7vmin; width:  20%; height: 10%; margin-left: 5%; margin-right: 5%;">
+            <input id = "pass4"type="password" pattern="[0-9]*" inputmode="numeric" data-hs-pin-input-item class = "styled-date" style="font-size: 7vmin; width:  20%; height: 10%; margin-left: 5%; margin-right: 5%;">
+        </div> 
+    </h1>
+
+    <label id = "OTPTextLable" style="color :red ; display: none;" >Incorrect PIN</label><br>
+    <button id = "PassUpdate" style="width: 60%;">UPDATE</button>
+    <label><br></label><br>
+    <button id ="Backkk" onclick="history.back()" style="width: 60%; display: none;">Go Back</button>
+</div>
+<script src= "../JScript/Matter.js"></script>
+
+</html>

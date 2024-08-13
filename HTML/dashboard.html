@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard - Vending Machine</title>
+	<link rel="stylesheet" type="text/css" href="../CSS/login.css">
+	<script src="../Lib/5c67aae1f2.js" crossorigin="anonymous"></script>
+	<script src = "../Lib/jquery.js"></script>
+
+	<style>
+		@font-face 
+		{
+    		font-family: "PageFont";
+    		src: url("../Assets/Fonts/Jua-Regular.woff") format('woff');
+		}
+
+		iframe { display:block; }
+	</style>
+
+	<script src="../JScript/Dashboard.js"></script>
+
+</head>
+<body style="font-family: 'PageFont';" >
+	<div id="dashboardMainContainer">
+		<div class="dashboard_sidebar" id="dashboard_sidebar">
+			<h3 class="dashboard_logo" id="dashboard_logo" style="justify-content: center; font-size: 8vmin;"> Dashboard</h3>
+			<div class="dashboard_sidebar_user">	
+				<img src="../Assets/ss.jpg" alt="User image." id="userImage" />
+				<span>Admin</span>
+			</div>
+			<div class="dashboard_sidebar_menus">
+				<ul class="dashboard_menu_lists" style="list-style-position: inside; padding-left: 0;">
+					<li class="menuActive" id = "button1">
+						<lable><i class="fa-solid fa-gauge menuIcons"></i> <span class="menuText"> Sales History</lable>
+					</li>
+					<li id = "button2">
+						<lable><i class="fa-solid fa-gauge menuIcons"></i><span class="menuText"> Restock </lable>
+					</li>
+
+					<li id = "button3">
+						<lable><i class="fa-solid fa-gauge menuIcons"></i><span class="menuText">  Replace Products</lable>
+					</li>
+
+					<li id = "button4">
+						<lable><i class="fa-solid fa-gauge menuIcons"></i><span class="menuText">  Products List</lable>
+					</li>
+
+					<li id = "button5">
+						<lable><i class="fa-solid fa-gauge menuIcons"></i><span class="menuText">  User Accounts </lable>
+					</li>
+				</ul>
+			</div>
+			<div id = "Alert">
+				<div style="position: relative;left: 50%; transform: translate(-50%, 0%);">
+					<center>
+						<img src="../Assets/Ui/warning-icon.png" alt="alert" style="object-fit:scale-down; width: 15%;">
+						<h2>Alert</h2>
+						<h3>Running low on Stock</h3>
+					</center>
+				</div>
+			</div>
+		</div>
+		<div class="dashboard_content_container" id="dashboard_content_container">
+			<iframe id = "iframe1" src="purchase.html" title="admin" style="height: 100%; width: 100%;" ></iframe>
+		</div>
+	</div>
+</body>
+</html>

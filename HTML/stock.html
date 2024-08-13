@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Availability of Tins</title>
+    <link rel="stylesheet" href="../Lib/bootstrap.min.css">
+
+
+
+    <style>
+		@font-face 
+		{
+    		font-family: "PageFont";
+    		src: url("../Assets/Fonts/Jua-Regular.woff") format('woff');
+		}
+
+        .container
+        {
+            background-color:  rgba(150, 150, 150, 0.2);
+            backdrop-filter: blur(25Px);
+
+            border-color:  rgba(50, 50, 50, 0.2);
+            border-style: solid;
+            border-width: 25px;
+
+            justify-content: space-between;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .styled-date {
+            width: 200px;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .styled-date:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+	</style>
+    <script src="../Lib/jquery.js"></script>
+    <script>
+
+        function delay(ms) 
+        {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        var dataToSend = 
+        {
+            Table: 'Null',
+            index: 0,
+            Buy: "NULL",
+            Stock : 0,
+            Token: 0,
+            branch:"vending1"
+        };
+       
+
+        $(document).ready(async function() {
+            while (true) 
+            {
+                dataToSend.branch = $("#Branch").val();
+                $.ajax({
+                    url: '../PHP/stock.php',
+                    method: 'POST',
+                    data: dataToSend,
+                    dataType: 'json',
+                    success: function(response) {
+                        let products = response;
+                        let tableContent = '';
+                        products.forEach(product => {
+                            if (product.stock <= 5) {
+                                tableContent += `<tr style="color:red">
+                                                    <td>${product.posId}</td>
+                                                    <td>${product.proID}</td>
+                                                    <td>${product.Name}</td>
+                                                    <td>${product.stock}</td>
+                                                </tr>`;
+                            } else {
+                                tableContent += `<tr style="color:black">
+                                                    <td>${product.posId}</td>
+                                                    <td>${product.proID}</td>
+                                                    <td>${product.Name}</td>
+                                                    <td>${product.stock}</td>
+                                                </tr>`;
+                            }
+                        });
+                        $('#availabilityTable').html(tableContent);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });             
+
+                await delay(1000);
+            }
+        });
+    </script>
+
+
+</head>
+<body style="background-color: wheat; font-family: 'PageFont';" >
+    <br> <b><center><label style="font-size: 50px;" class="container"> Stock</label></center></b><br>
+    <div class="container">
+        <center>
+        <label for="product">Branch:</label>
+            <select id="Branch" name="Branch" required class = "styled-date">
+                <option value="vending">Branch-1</option>
+                <option value="vending1">Branch-2</option>
+            </select>       
+        </center>
+        <table class="table table-striped" style="font-size: 20px;">
+            <thead>
+                <tr>
+                    <th>Pos ID</th>
+                    <th>Product ID</th>
+                    <th>Name</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody id="availabilityTable">
+                <!-- Content will be inserted here via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+    <br><br>
+</body>
+</html>

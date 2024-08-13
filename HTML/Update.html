@@ -1,0 +1,222 @@
+<html>
+<head>
+    <title>Vending Machine Admin</title>
+
+    <style>
+		@font-face 
+		{
+    		font-family: "PageFont";
+    		src: url("../Assets/Fonts/Jua-Regular.woff") format('woff');
+		}
+	</style>
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background-color:wheat ;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+
+            background-color:  rgba(150, 150, 150, 0.2);
+            backdrop-filter: blur(25Px);
+
+            border-color:  rgba(50, 50, 50, 0.2);
+            border-style: solid;
+            border-width: 25px;
+
+            justify-content: space-between;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+            width: 50%;
+            position: relative;
+            top: 40%;
+            transform: translate(0, -50%);
+            margin: auto;
+            overflow:contain ;
+            padding: 20px;
+
+            
+            margin-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2b2020;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            font-family: 'PageFont';
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            background: #8dafb2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: rgba(0, 0, 255, 0.2);
+        }
+        button:hover {
+            background-color: rgba(0, 0, 255, 0.5)
+        }
+
+        button:active
+        {
+            background-color: rgba(0, 0, 255, 0.2);
+        }
+
+
+        .split-container {
+            display: flex;
+            flex: 1;
+            height: 100%;
+        }
+    </style>
+
+<script src = "../Lib/jquery.js"></script>
+
+<script>
+    var dataToSend = 
+{
+    Table: 'Null',
+    index: 0,
+    Buy: "NULL",
+    Stock : 0,
+    Token: 0
+};
+
+function ajax(dataToSend) 
+{
+    dataToSend.branch = $("#Branch").val();
+    return new Promise((resolve, reject) => 
+    {
+        $.ajax(
+        {
+            url: '../PHP/Update.php',
+            method: 'POST',
+            data: dataToSend,
+            dataType: 'json',
+            success: function(response)
+            {
+                resolve(response); 
+            },
+            error: function(xhr, status, error)
+            {
+                console.error(xhr.responseText);
+                reject(error);
+            }
+        });
+    });
+}
+
+function delay(ms)
+{
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+var tempBrc;
+async function CKRS() 
+{
+    while (true) 
+    {
+        if (tempBrc != $("#Branch").val()) 
+        {
+            tempBrc = $("#Branch").val();
+            var src = "Main.html?Branch=" + tempBrc;
+            $("#iframe1").attr("src", src);
+        }
+        await delay(1000);
+    }
+}
+
+
+$(document).ready(async function()
+{
+    CKRS();
+    tempBrc = $("#Branch").val();
+
+    $("#rest").click(async function()
+    {
+        var pos = $("#posId").val();
+        var pro = $("#product").val();
+        var Stock = $('#stock').val();
+
+        dataToSend.Table = "Admin";
+        dataToSend.index = pos;
+        dataToSend.Stock = Stock;
+        dataToSend.Buy = pro;
+        dataToSend.branch = $("#Branch").val();
+
+        obj = await ajax(dataToSend);
+                
+    });  
+});
+</script>
+</head>
+<body style="background-color: wheat; font-family: 'PageFont';" >
+    <div class="split-container">
+        <div class="container" style="flex: 35%; margin: 50px; height: 50%;">
+            <h1>Replace Products</h1>
+            <form>
+                <label for="product">Branch:</label>
+            <select id="Branch" name="Branch" required class = "styled-date">
+                <option value="vending">Branch-1</option>
+                <option value="vending1">Branch-2</option>
+            </select>       
+
+                <label for="posId">Position ID:</label>
+                <input type="number" id="posId" name="posId">
+
+                <label for="product">Product ID:</label>
+                <select id="product" name="product" required>
+                    <option value="tin1">Cola</option>
+                    <option value="tin2">Pinapple</option>
+                    <option value="tin3">Lime</option>
+                    <option value="tin4">Coconut Water</option>
+                    <option value="tin5">Soda</option>
+                    <option value="tin6">Energy</option>
+                    <option value="tin7">Jungle</option>
+                    <option value="bottel1">Tropicana</option>
+                    <option value="bottel2">Minute Maid</option>
+                    <option value="bottel3">Simply Orange</option>
+                    <option value="bottel4">Ocean Spray</option>
+                    <option value="bottel5">Welch's</option>
+                    <option value="snack1">Lay's</option>
+                    <option value="snack2">Doritos</option>
+                    <option value="snack3">Pringles</option>
+                    <option value="snack4">Cheetos</option>
+                    <option value="bar1">Snickers</option>
+                    <option value="bar2">Hershey's</option>
+                    <option value="bar3">Kit Kat</option>
+                    <option value="bar4">Twix</option>
+                </select>
+
+                <label for="stock">Stock:</label>
+                <input type="number" id="stock" name="stock" required>
+
+            </form>
+            <button id = "rest"> Restock</button>
+        </div>
+
+        <br><br>
+        <div style="flex: 65%; ">
+            <iframe id = "iframe1" src="Main.html" title="admin" style="height: 100%; width: 100%; pointer-events: none;"  frameborder="0"></iframe>
+        </div>
+
+    </div>
+
+</body>
+</html>

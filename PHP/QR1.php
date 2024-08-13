@@ -1,7 +1,7 @@
 <?php 
 include 'phpqrcode/qrlib.php'; 
 
-$con = new mysqli("localhost", "root" ,"1234", "vending");
+$con = new mysqli("localhost", "root" ,"1234", "vending1");
 $query = "select * from TokenCount;";
 $result = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($result);
@@ -19,8 +19,9 @@ $query = "insert into Client (Token, Server) VALUES ($count, $server);";
 $result = mysqli_query($con, $query);
 
 
-function generate_stylized_qr($data)
+function generate_stylized_qr($data) 
 {
+    
     ob_start();
     QRcode::png($data, null, QR_ECLEVEL_H, 10, 4);
     $image_string = ob_get_contents();
@@ -46,13 +47,13 @@ function generate_stylized_qr($data)
         for ($y = 0; $y < $height; $y++) 
         {
             $pixel_color = imagecolorat($qr_image, $x, $y);
-            if ($pixel_color != 0) 
+            if ($pixel_color != 0)
             {
                 imagesetpixel($styled_image, $x, $y, $dot_color);
             }
         }
     }
-    
+
     header('Content-Type: image/png');
     imagepng($styled_image);
 
@@ -62,9 +63,10 @@ function generate_stylized_qr($data)
 }
 
 $text = "https://192.168.43.170/HTML%20Project/Vending/HTML/ClientInfo.html"; 
-$params = http_build_query(['Count' => $count, 'Token' => $server, 'Branch' => 'vending']);
+$params = http_build_query(['Count' => $count, 'Token' => $server, 'Branch' => 'vending1']);
 $full_url = $text . '?' . $params;
+
 
 generate_stylized_qr($full_url);
 //QRcode::png($full_url); 
-?>  
+?>

@@ -1,0 +1,51 @@
+<html>
+
+<script src = "../Lib/jquery.js"></script>
+
+
+<style>
+    @font-face 
+    {
+        font-family: "PageFont";
+        src: url("../Assets/Fonts/Jua-Regular.woff") format('woff');
+    }
+
+    body
+    {
+        font-family: 'PageFont';
+    }
+
+    div
+    {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        font-size: 20vh;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+</style>
+
+<script>
+    function delay(ms) 
+    {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function  Await()
+    {
+        await delay(5000);
+        
+        const baseURL = "QR.html";
+        window.location.href = baseURL;
+    }
+
+    Await();
+
+
+</script>
+
+<body style="background-color: wheat;">
+    <div>Thank You For Purchasing </div>
+</body>
+</html>

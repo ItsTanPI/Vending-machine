@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Availability of Tins</title>
+    <link rel="stylesheet" href="../Lib/bootstrap.min.css">
+    <script src="../Lib/jquery.js"></script>
+
+
+    <style>
+		@font-face 
+		{
+    		font-family: "PageFont";
+    		src: url("../Assets/Fonts/Jua-Regular.woff") format('woff');
+		}
+
+        .container
+        {
+            background-color:  rgba(150, 150, 150, 0.2);
+            backdrop-filter: blur(25Px);
+
+            border-color:  rgba(50, 50, 50, 0.2);
+            border-style: solid;
+            border-width: 25px;
+
+            justify-content: space-between;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);            
+        }
+
+        button 
+        {
+            font-family: 'PageFont';
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            background: #8dafb2;
+            color: white;
+            font-size: 50px;
+            cursor: pointer;
+            background-color: rgba(0, 0, 255, 0.2);
+        }
+
+        button:hover 
+        {
+            background-color: rgba(0, 0, 255, 0.5)
+        }
+
+        button:active
+        {
+            background-color: rgba(0, 0, 255, 0.2);
+        }
+
+
+        .styled-date 
+        {
+            width: 200px;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+
+        .styled-date:focus 
+        {
+            outline: none;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }	
+    </style>
+
+    <script src = "../JScript/Availability.js"></script>
+</head>
+<body style="background-color: wheat; font-family: 'PageFont';" >
+    
+    <br><br><b><center><label style="font-size: 60px;" class="container"> Products List</label></center></b><br><br>
+    <div class="container">
+
+        <center>
+            <label for="product">Branch:</label>
+                <select id="Branch" name="Branch" required class = "styled-date">
+                <option value="vending">Branch-1</option>
+                <option value="vending1">Branch-2</option>
+                </select>       
+        </center>
+        
+        <table class="table table-striped" style="font-size: 20px;">
+            <thead>
+                <tr>
+                    <th>Tin ID</th>
+                    <th>Product</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price(₹)</th>
+                </tr>
+            </thead>
+            <tbody id="availabilityTable">
+                
+            </tbody>
+        </table>
+    </div>
+    <br><br><br>
+    <center>
+    <button id = "Update" >Update</button> &nbsp; &nbsp; &nbsp; &nbsp;
+    <button id = 'Reset'>Reset</button>
+    </center>
+    <br><br>
+</body>
+</html>
